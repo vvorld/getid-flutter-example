@@ -22,6 +22,10 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>The app uses the camera for ID document and selfie capture during the identity verification process.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>The app uses already taken and stored in gallery pictures of ID documents during the identity verification process.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
