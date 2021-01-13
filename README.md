@@ -21,3 +21,6 @@ cd ios
 pod install
 ```
 Then just type `flutter run` in the root project directory.
+
+### Android
+Just type `flutter run` in the root project directory.
