@@ -60,5 +60,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'ee.getid:getidlib:1.6.0'
+    implementation 'ee.getid:getidlib:2.0.0'
 }

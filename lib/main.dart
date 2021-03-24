@@ -39,8 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Both can be found and modified either through your GetID admin panel
   or via contacting our integration team.
   */
-  static const sdkKey = '...';
   static const apiURL = '...';
+  static const sdkKey = '...';
+  static const flowName = 'getid-doc-selfie';
   /*
   Note:
   We don't recommend to use the SDK key at the client-side in the production environment.
@@ -61,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () async {
                 try {
                   final token = await getToken();
-                  await platform.invokeMethod('launchGetID', {'apiURL': apiURL, 'token': token});
+                  await platform.invokeMethod('launchGetID', {'apiURL': apiURL, 'token': token, 'flowName': flowName});
                 } catch (exception) {
                   print(exception);
                 }
@@ -76,10 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<String> getToken() async {
     var headers = {
-      'apikey': sdkKey,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-sdk-key': sdkKey
     };
-    final response = await http.post('${apiURL}/sdk/v1/token', headers: headers);
+    final response = await http.post('${apiURL}/sdk/v2/token', headers: headers);
     if (response.statusCode == 200) {
       Map<String, dynamic> body = jsonDecode(response.body);
       return body['token'];

@@ -16,16 +16,16 @@ import UIKit
                 result(FlutterMethodNotImplemented)
                 return
             }
-            guard let (apiURL, token) = self?.getTokenAndApiURL(call: call, result: result) else {
+            guard let (apiURL, token, flowName) = self?.getArguments(call: call, result: result) else {
                 return
             }
-            self?.launchGetID(apiURL: apiURL, token: token, result: result)
+            self?.launchGetID(apiURL: apiURL, token: token, flowName: flowName, result: result)
         }
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
-    private func getTokenAndApiURL(call: FlutterMethodCall, result: @escaping FlutterResult) -> (apiURL: String, token: String)? {
+    private func getArguments(call: FlutterMethodCall, result: @escaping FlutterResult) -> (apiURL: String, token: String, flowName: String)? {
         guard let arguments = call.arguments as? [String: String] else {
             result(FlutterError(code: "Unexpected arguments", message: "arguments type should be [String: String]", details: nil))
             return nil
@@ -38,16 +38,19 @@ import UIKit
             result(FlutterError(code: "Missing argument", message: "token argument is missing", details: nil))
             return nil
         }
-        return (apiURL, token)
+        guard let flowName = arguments["flowName"] else {
+            result(FlutterError(code: "Missing argument", message: "flowName argument is missing", details: nil))
+            return nil
+        }
+        return (apiURL, token, flowName)
     }
 
-    private func launchGetID(apiURL: String, token: String, result: @escaping FlutterResult) {
-        GetIDFactory.makeGetIDViewController(token: token, url: apiURL) { [weak self] vc, error in
-            guard let viewController = vc else {
-                return result(FlutterError(code: "GetID Error", message: "Something went wrong: \(error!)", details: nil))
-            }
-            self?.window?.rootViewController?.present(viewController, animated: true, completion: nil)
-            result(true)
-        }
+    private func launchGetID(apiURL: String, token: String, flowName: String, result: @escaping FlutterResult) {
+        GetIDSDK.startVerificationFlow(
+            apiUrl: apiURL,
+            auth: .jwt(token),
+            flowName: flowName
+        )
+        result(true)
     }
 }
