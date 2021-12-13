@@ -2,5 +2,5 @@ platform :ios, '11.0'
 
 target 'Runner' do
   use_frameworks!
-  pod 'GetID', '2.0.0'
+  pod 'GetID', '2.6.0'
 end
