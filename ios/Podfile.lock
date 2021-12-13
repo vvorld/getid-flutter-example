@@ -1,0 +1,16 @@
+PODS:
+  - GetID (2.6.0)
+
+DEPENDENCIES:
+  - GetID (= 2.6.0)
+
+SPEC REPOS:
+  trunk:
+    - GetID
+
+SPEC CHECKSUMS:
+  GetID: df9cf56d01917165a85d47de7dd1cb4f43cb3adc
+
+PODFILE CHECKSUM: c4b25e4fb9b15909ee9ec3e3afdf69b2fa5884f0
+
+COCOAPODS: 1.11.2
